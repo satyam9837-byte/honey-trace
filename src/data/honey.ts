@@ -141,7 +141,7 @@ export const batches: Batch[] = [
     location: "Kapurthala, Punjab",
     coords: "31.38°N · 75.38°E",
     harvestDate: "22 Feb 2026",
-    harvestDate: "22 Feb 2026",
+
     harvestWindow: "14 – 22 Feb 2026",
     jars: 780,
     colonies: 96,
