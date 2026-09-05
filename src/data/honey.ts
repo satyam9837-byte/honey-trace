@@ -5,6 +5,21 @@ export type CustodyStep = {
   hash: string;
 };
 
+export type PollenSource = {
+  flower: string;
+  share: number;
+  bloom: string;
+  distance: string;
+};
+
+export type ProcessStep = {
+  stage: string;
+  detail: string;
+  date: string;
+  operator: string;
+  temp: string;
+};
+
 export type Batch = {
   id: string;
   name: string;
@@ -14,14 +29,19 @@ export type Batch = {
   location: string;
   coords: string;
   harvestDate: string;
+  harvestWindow: string;
+  jars: number;
   colonies: number;
   purity: number;
   moisture: string;
   hmf: string;
   scans: number;
   block: string;
+  pollen: PollenSource[];
+  processing: ProcessStep[];
   steps: CustodyStep[];
 };
+
 
 export const batches: Batch[] = [
   {
