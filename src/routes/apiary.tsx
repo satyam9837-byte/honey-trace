@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Shell";
 import { forecast, hives } from "@/data/honey";
 
@@ -38,9 +38,13 @@ function Apiary() {
               Sahyadri Ridge, live.
             </h1>
           </div>
-          <button className="rounded-full bg-brand px-5 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-brand/40 transition hover:-translate-y-0.5">
+          <Link
+            to="/register"
+            className="rounded-full bg-brand px-5 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-brand/40 transition hover:-translate-y-0.5"
+          >
             Register a batch
-          </button>
+          </Link>
+
         </div>
 
         <div className="mt-7 grid gap-5 lg:grid-cols-3">

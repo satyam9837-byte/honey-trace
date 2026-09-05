@@ -5,6 +5,21 @@ export type CustodyStep = {
   hash: string;
 };
 
+export type PollenSource = {
+  flower: string;
+  share: number;
+  bloom: string;
+  distance: string;
+};
+
+export type ProcessStep = {
+  stage: string;
+  detail: string;
+  date: string;
+  operator: string;
+  temp: string;
+};
+
 export type Batch = {
   id: string;
   name: string;
@@ -14,14 +29,19 @@ export type Batch = {
   location: string;
   coords: string;
   harvestDate: string;
+  harvestWindow: string;
+  jars: number;
   colonies: number;
   purity: number;
   moisture: string;
   hmf: string;
   scans: number;
   block: string;
+  pollen: PollenSource[];
+  processing: ProcessStep[];
   steps: CustodyStep[];
 };
+
 
 export const batches: Batch[] = [
   {
@@ -33,13 +53,59 @@ export const batches: Batch[] = [
     location: "Satara, Maharashtra",
     coords: "17.68°N · 74.01°E",
     harvestDate: "04 Mar 2026",
+    harvestWindow: "26 Feb – 04 Mar 2026",
+    jars: 1240,
     colonies: 214,
     purity: 99.2,
     moisture: "16.4%",
     hmf: "8 meq/kg",
+    pollen: [
+      { flower: "Karvi (Strobilanthes)", share: 46, bloom: "Jan – Mar", distance: "0.8 km" },
+      { flower: "Wild coriander", share: 24, bloom: "Feb – Mar", distance: "1.4 km" },
+      { flower: "Eucalyptus", share: 18, bloom: "Dec – Feb", distance: "2.1 km" },
+      { flower: "Mixed meadow herbs", share: 12, bloom: "Year round", distance: "0.4 km" },
+    ],
+    processing: [
+      {
+        stage: "Uncapping",
+        detail: "Cold knife, no heat applied to comb",
+        date: "04 Mar 2026",
+        operator: "Meera Rathod",
+        temp: "28°C",
+      },
+      {
+        stage: "Extraction",
+        detail: "Manual radial extractor, 8 frames per spin",
+        date: "04 Mar 2026",
+        operator: "Meera Rathod",
+        temp: "30°C",
+      },
+      {
+        stage: "Settling & straining",
+        detail: "48h gravity settling, 200-micron mesh only",
+        date: "05 Mar 2026",
+        operator: "Sahyadri press room",
+        temp: "26°C",
+      },
+      {
+        stage: "Lab testing",
+        detail: "C4 isotope, HMF, moisture, pollen count",
+        date: "06 Mar 2026",
+        operator: "AgriLab Pune",
+        temp: "—",
+      },
+      {
+        stage: "Jarring & sealing",
+        detail: "Glass jars, tamper seal, QR code affixed",
+        date: "07 Mar 2026",
+        operator: "Sahyadri press room",
+        temp: "24°C",
+      },
+    ],
     scans: 38412,
     block: "#8,402,117",
     steps: [
+
       {
         label: "Frames harvested",
         detail: "Hive 12 · sensor weight 24.1 kg",
@@ -75,12 +141,59 @@ export const batches: Batch[] = [
     location: "Kapurthala, Punjab",
     coords: "31.38°N · 75.38°E",
     harvestDate: "22 Feb 2026",
+
+    harvestWindow: "14 – 22 Feb 2026",
+    jars: 780,
     colonies: 96,
     purity: 98.1,
     moisture: "17.1%",
     hmf: "11 meq/kg",
+    pollen: [
+      { flower: "Mustard (Brassica)", share: 71, bloom: "Jan – Feb", distance: "0.3 km" },
+      { flower: "Berseem clover", share: 15, bloom: "Dec – Mar", distance: "1.1 km" },
+      { flower: "Sarson field weeds", share: 9, bloom: "Jan – Feb", distance: "0.6 km" },
+      { flower: "Citrus blossom", share: 5, bloom: "Feb – Mar", distance: "2.8 km" },
+    ],
+    processing: [
+      {
+        stage: "Uncapping",
+        detail: "Hand uncapped at the village centre",
+        date: "22 Feb 2026",
+        operator: "Harpal Singh",
+        temp: "22°C",
+      },
+      {
+        stage: "Extraction",
+        detail: "Shared community extractor, 6 frames per spin",
+        date: "22 Feb 2026",
+        operator: "Doaba collection centre",
+        temp: "24°C",
+      },
+      {
+        stage: "Settling & straining",
+        detail: "36h settling, double mesh strain",
+        date: "23 Feb 2026",
+        operator: "Doaba collection centre",
+        temp: "21°C",
+      },
+      {
+        stage: "Lab testing",
+        detail: "Sugar adulteration screen passed",
+        date: "25 Feb 2026",
+        operator: "Punjab Agri Testing",
+        temp: "—",
+      },
+      {
+        stage: "Jarring & sealing",
+        detail: "Glass jars, QR code affixed · Lot 2",
+        date: "26 Feb 2026",
+        operator: "Doaba collection centre",
+        temp: "23°C",
+      },
+    ],
     scans: 9106,
     block: "#8,377,004",
+
     steps: [
       {
         label: "Frames harvested",

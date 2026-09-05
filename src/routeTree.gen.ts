@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiaryRouteImport } from './routes/apiary'
+import { Route as ChainRouteImport } from './routes/chain'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as VerifyIndexRouteImport } from './routes/verify.index'
 import { Route as VerifyBatchIdRouteImport } from './routes/verify.$batchId'
 
@@ -22,6 +24,16 @@ const IndexRoute = IndexRouteImport.update({
 const ApiaryRoute = ApiaryRouteImport.update({
   id: '/apiary',
   path: '/apiary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChainRoute = ChainRouteImport.update({
+  id: '/chain',
+  path: '/chain',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VerifyIndexRoute = VerifyIndexRouteImport.update({
@@ -38,12 +50,16 @@ const VerifyBatchIdRoute = VerifyBatchIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/apiary': typeof ApiaryRoute
+  '/chain': typeof ChainRoute
+  '/register': typeof RegisterRoute
   '/verify/$batchId': typeof VerifyBatchIdRoute
   '/verify/': typeof VerifyIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/apiary': typeof ApiaryRoute
+  '/chain': typeof ChainRoute
+  '/register': typeof RegisterRoute
   '/verify/$batchId': typeof VerifyBatchIdRoute
   '/verify': typeof VerifyIndexRoute
 }
@@ -51,20 +67,32 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/apiary': typeof ApiaryRoute
+  '/chain': typeof ChainRoute
+  '/register': typeof RegisterRoute
   '/verify/$batchId': typeof VerifyBatchIdRoute
   '/verify/': typeof VerifyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apiary' | '/verify/$batchId' | '/verify/'
+  fullPaths:
+    '/' | '/apiary' | '/chain' | '/register' | '/verify/$batchId' | '/verify/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apiary' | '/verify/$batchId' | '/verify'
-  id: '__root__' | '/' | '/apiary' | '/verify/$batchId' | '/verify/'
+  to: '/' | '/apiary' | '/chain' | '/register' | '/verify/$batchId' | '/verify'
+  id:
+    | '__root__'
+    | '/'
+    | '/apiary'
+    | '/chain'
+    | '/register'
+    | '/verify/$batchId'
+    | '/verify/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiaryRoute: typeof ApiaryRoute
+  ChainRoute: typeof ChainRoute
+  RegisterRoute: typeof RegisterRoute
   VerifyBatchIdRoute: typeof VerifyBatchIdRoute
   VerifyIndexRoute: typeof VerifyIndexRoute
 }
@@ -83,6 +111,20 @@ declare module '@tanstack/react-router' {
       path: '/apiary'
       fullPath: '/apiary'
       preLoaderRoute: typeof ApiaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chain': {
+      id: '/chain'
+      path: '/chain'
+      fullPath: '/chain'
+      preLoaderRoute: typeof ChainRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/verify/': {
@@ -105,6 +147,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiaryRoute: ApiaryRoute,
+  ChainRoute: ChainRoute,
+  RegisterRoute: RegisterRoute,
   VerifyBatchIdRoute: VerifyBatchIdRoute,
   VerifyIndexRoute: VerifyIndexRoute,
 }
