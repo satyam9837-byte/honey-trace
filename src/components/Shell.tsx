@@ -2,10 +2,13 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
 const navItems = [
-  { to: "/", label: "Trace" },
+  { to: "/", label: "Home" },
+  { to: "/chain", label: "Traceability" },
   { to: "/verify", label: "Verify" },
   { to: "/apiary", label: "Apiary" },
+  { to: "/register", label: "Register" },
 ];
+
 
 export function Shell({ children }: { children: ReactNode }) {
   return (
