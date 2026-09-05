@@ -102,8 +102,10 @@ export const batches: Batch[] = [
         temp: "24°C",
       },
     ],
-
+    scans: 38412,
+    block: "#8,402,117",
     steps: [
+
       {
         label: "Frames harvested",
         detail: "Hive 12 · sensor weight 24.1 kg",
