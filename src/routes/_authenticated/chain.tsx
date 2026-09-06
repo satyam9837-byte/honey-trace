@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Shell";
 import { batches } from "@/data/honey";
 
-export const Route = createFileRoute("/chain")({
+export const Route = createFileRoute("/_authenticated/chain")({
   head: () => ({
     meta: [
       { title: "Full traceability chain — pollen to jar | Honey Chain" },

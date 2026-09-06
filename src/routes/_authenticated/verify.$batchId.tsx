@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Shell";
 import { findBatch } from "@/data/honey";
 
-export const Route = createFileRoute("/verify/$batchId")({
+export const Route = createFileRoute("/_authenticated/verify/$batchId")({
   head: ({ params }) => ({
     meta: [
       { title: `Batch ${params.batchId} verified — Honey Chain` },

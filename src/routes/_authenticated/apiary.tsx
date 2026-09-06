@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shell } from "@/components/Shell";
 import { forecast, hives } from "@/data/honey";
 
-export const Route = createFileRoute("/apiary")({
+export const Route = createFileRoute("/_authenticated/apiary")({
   head: () => ({
     meta: [
       { title: "Apiary dashboard — hive health & yield | Honey Chain" },
