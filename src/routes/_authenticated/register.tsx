@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Shell } from "@/components/Shell";
 
-export const Route = createFileRoute("/register")({
+export const Route = createFileRoute("/_authenticated/register")({
   head: () => ({
     meta: [
       { title: "Register a hive or honey batch | Honey Chain" },

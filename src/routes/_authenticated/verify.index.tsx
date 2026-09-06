@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Shell } from "@/components/Shell";
 import { batches } from "@/data/honey";
 
-export const Route = createFileRoute("/verify/")({
+export const Route = createFileRoute("/_authenticated/verify/")({
   head: () => ({
     meta: [
       { title: "Verify a honey batch — Honey Chain" },

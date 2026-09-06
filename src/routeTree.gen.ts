@@ -9,148 +9,150 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiaryRouteImport } from './routes/apiary'
-import { Route as ChainRouteImport } from './routes/chain'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as VerifyIndexRouteImport } from './routes/verify.index'
-import { Route as VerifyBatchIdRouteImport } from './routes/verify.$batchId'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedApiaryRouteImport } from './routes/_authenticated/apiary'
+import { Route as AuthenticatedChainRouteImport } from './routes/_authenticated/chain'
+import { Route as AuthenticatedRegisterRouteImport } from './routes/_authenticated/register'
+import { Route as AuthenticatedVerifyIndexRouteImport } from './routes/_authenticated/verify.index'
+import { Route as AuthenticatedVerifyBatchIdRouteImport } from './routes/_authenticated/verify.$batchId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/_authenticated/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiaryRoute = ApiaryRouteImport.update({
-  id: '/apiary',
+const AuthenticatedApiaryRoute = AuthenticatedApiaryRouteImport.update({
+  id: '/_authenticated/apiary',
   path: '/apiary',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChainRoute = ChainRouteImport.update({
-  id: '/chain',
+const AuthenticatedChainRoute = AuthenticatedChainRouteImport.update({
+  id: '/_authenticated/chain',
   path: '/chain',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
+const AuthenticatedRegisterRoute = AuthenticatedRegisterRouteImport.update({
+  id: '/_authenticated/register',
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VerifyIndexRoute = VerifyIndexRouteImport.update({
-  id: '/verify/',
-  path: '/verify/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VerifyBatchIdRoute = VerifyBatchIdRouteImport.update({
-  id: '/verify/$batchId',
-  path: '/verify/$batchId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const AuthenticatedVerifyIndexRoute =
+  AuthenticatedVerifyIndexRouteImport.update({
+    id: '/_authenticated/verify/',
+    path: '/verify/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AuthenticatedVerifyBatchIdRoute =
+  AuthenticatedVerifyBatchIdRouteImport.update({
+    id: '/_authenticated/verify/$batchId',
+    path: '/verify/$batchId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/apiary': typeof ApiaryRoute
-  '/chain': typeof ChainRoute
-  '/register': typeof RegisterRoute
-  '/verify/$batchId': typeof VerifyBatchIdRoute
-  '/verify/': typeof VerifyIndexRoute
+  '/apiary': typeof AuthenticatedApiaryRoute
+  '/chain': typeof AuthenticatedChainRoute
+  '/register': typeof AuthenticatedRegisterRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
+  '/verify/': typeof AuthenticatedVerifyIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/apiary': typeof ApiaryRoute
-  '/chain': typeof ChainRoute
-  '/register': typeof RegisterRoute
-  '/verify/$batchId': typeof VerifyBatchIdRoute
-  '/verify': typeof VerifyIndexRoute
+  '/apiary': typeof AuthenticatedApiaryRoute
+  '/chain': typeof AuthenticatedChainRoute
+  '/register': typeof AuthenticatedRegisterRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
+  '/verify': typeof AuthenticatedVerifyIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/apiary': typeof ApiaryRoute
-  '/chain': typeof ChainRoute
-  '/register': typeof RegisterRoute
-  '/verify/$batchId': typeof VerifyBatchIdRoute
-  '/verify/': typeof VerifyIndexRoute
+  '/_authenticated/apiary': typeof AuthenticatedApiaryRoute
+  '/_authenticated/chain': typeof AuthenticatedChainRoute
+  '/_authenticated/register': typeof AuthenticatedRegisterRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
+  '/_authenticated/verify/': typeof AuthenticatedVerifyIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/apiary' | '/chain' | '/register' | '/verify/$batchId' | '/verify/'
+    '/apiary' | '/chain' | '/register' | '/' | '/verify/$batchId' | '/verify/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apiary' | '/chain' | '/register' | '/verify/$batchId' | '/verify'
+  to: '/apiary' | '/chain' | '/register' | '/' | '/verify/$batchId' | '/verify'
   id:
     | '__root__'
-    | '/'
-    | '/apiary'
-    | '/chain'
-    | '/register'
-    | '/verify/$batchId'
-    | '/verify/'
+    | '/_authenticated/apiary'
+    | '/_authenticated/chain'
+    | '/_authenticated/register'
+    | '/_authenticated/'
+    | '/_authenticated/verify/$batchId'
+    | '/_authenticated/verify/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ApiaryRoute: typeof ApiaryRoute
-  ChainRoute: typeof ChainRoute
-  RegisterRoute: typeof RegisterRoute
-  VerifyBatchIdRoute: typeof VerifyBatchIdRoute
-  VerifyIndexRoute: typeof VerifyIndexRoute
+  AuthenticatedApiaryRoute: typeof AuthenticatedApiaryRoute
+  AuthenticatedChainRoute: typeof AuthenticatedChainRoute
+  AuthenticatedRegisterRoute: typeof AuthenticatedRegisterRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedVerifyBatchIdRoute: typeof AuthenticatedVerifyBatchIdRoute
+  AuthenticatedVerifyIndexRoute: typeof AuthenticatedVerifyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/apiary': {
-      id: '/apiary'
+    '/_authenticated/apiary': {
+      id: '/_authenticated/apiary'
       path: '/apiary'
       fullPath: '/apiary'
-      preLoaderRoute: typeof ApiaryRouteImport
+      preLoaderRoute: typeof AuthenticatedApiaryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/chain': {
-      id: '/chain'
+    '/_authenticated/chain': {
+      id: '/_authenticated/chain'
       path: '/chain'
       fullPath: '/chain'
-      preLoaderRoute: typeof ChainRouteImport
+      preLoaderRoute: typeof AuthenticatedChainRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/register': {
-      id: '/register'
+    '/_authenticated/register': {
+      id: '/_authenticated/register'
       path: '/register'
       fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
+      preLoaderRoute: typeof AuthenticatedRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/verify/': {
-      id: '/verify/'
+    '/_authenticated/verify/': {
+      id: '/_authenticated/verify/'
       path: '/verify'
       fullPath: '/verify/'
-      preLoaderRoute: typeof VerifyIndexRouteImport
+      preLoaderRoute: typeof AuthenticatedVerifyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/verify/$batchId': {
-      id: '/verify/$batchId'
+    '/_authenticated/verify/$batchId': {
+      id: '/_authenticated/verify/$batchId'
       path: '/verify/$batchId'
       fullPath: '/verify/$batchId'
-      preLoaderRoute: typeof VerifyBatchIdRouteImport
+      preLoaderRoute: typeof AuthenticatedVerifyBatchIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ApiaryRoute: ApiaryRoute,
-  ChainRoute: ChainRoute,
-  RegisterRoute: RegisterRoute,
-  VerifyBatchIdRoute: VerifyBatchIdRoute,
-  VerifyIndexRoute: VerifyIndexRoute,
+  AuthenticatedApiaryRoute: AuthenticatedApiaryRoute,
+  AuthenticatedChainRoute: AuthenticatedChainRoute,
+  AuthenticatedRegisterRoute: AuthenticatedRegisterRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedVerifyBatchIdRoute: AuthenticatedVerifyBatchIdRoute,
+  AuthenticatedVerifyIndexRoute: AuthenticatedVerifyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
