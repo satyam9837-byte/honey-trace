@@ -145,11 +145,72 @@
   }
 }
 
+@keyframes bee-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-6deg);
+  }
+  25% {
+    transform: translate(14px, -18px) rotate(8deg);
+  }
+  50% {
+    transform: translate(-8px, -30px) rotate(-10deg);
+  }
+  75% {
+    transform: translate(-18px, -10px) rotate(6deg);
+  }
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @utility blob {
   animation: floaty 9s ease-in-out infinite;
 }
 @utility blob2 {
   animation: floaty2 11s ease-in-out infinite;
+}
+@utility bee {
+  animation: bee-drift 7s ease-in-out infinite;
+}
+@utility auth-card {
+  animation: card-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@utility logo-pop {
+  animation: pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+@utility form-swap {
+  animation: swap-in 0.35s ease-out both;
 }
 @utility glass-panel {
   border: 1px solid var(--glass-border);

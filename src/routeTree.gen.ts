@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedApiaryRouteImport } from './routes/_authenticated/apiary'
 import { Route as AuthenticatedChainRouteImport } from './routes/_authenticated/chain'
@@ -16,48 +18,59 @@ import { Route as AuthenticatedRegisterRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedVerifyIndexRouteImport } from './routes/_authenticated/verify.index'
 import { Route as AuthenticatedVerifyBatchIdRouteImport } from './routes/_authenticated/verify.$batchId'
 
-const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
-  id: '/_authenticated/',
-  path: '/',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedApiaryRoute = AuthenticatedApiaryRouteImport.update({
-  id: '/_authenticated/apiary',
+  id: '/apiary',
   path: '/apiary',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedChainRoute = AuthenticatedChainRouteImport.update({
-  id: '/_authenticated/chain',
+  id: '/chain',
   path: '/chain',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedRegisterRoute = AuthenticatedRegisterRouteImport.update({
-  id: '/_authenticated/register',
+  id: '/register',
   path: '/register',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedVerifyIndexRoute =
   AuthenticatedVerifyIndexRouteImport.update({
-    id: '/_authenticated/verify/',
+    id: '/verify/',
     path: '/verify/',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedVerifyBatchIdRoute =
   AuthenticatedVerifyBatchIdRouteImport.update({
-    id: '/_authenticated/verify/$batchId',
+    id: '/verify/$batchId',
     path: '/verify/$batchId',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
-  '/': typeof AuthenticatedIndexRoute
   '/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
   '/verify/': typeof AuthenticatedVerifyIndexRoute
 }
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
@@ -67,6 +80,8 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_authenticated/apiary': typeof AuthenticatedApiaryRoute
   '/_authenticated/chain': typeof AuthenticatedChainRoute
   '/_authenticated/register': typeof AuthenticatedRegisterRoute
@@ -77,11 +92,26 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/apiary' | '/chain' | '/register' | '/' | '/verify/$batchId' | '/verify/'
+    | '/'
+    | '/auth'
+    | '/apiary'
+    | '/chain'
+    | '/register'
+    | '/verify/$batchId'
+    | '/verify/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/apiary' | '/chain' | '/register' | '/' | '/verify/$batchId' | '/verify'
+  to:
+    | '/auth'
+    | '/apiary'
+    | '/chain'
+    | '/register'
+    | '/'
+    | '/verify/$batchId'
+    | '/verify'
   id:
     | '__root__'
+    | '/_authenticated'
+    | '/auth'
     | '/_authenticated/apiary'
     | '/_authenticated/chain'
     | '/_authenticated/register'
@@ -91,6 +121,72 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/apiary': {
+      id: '/_authenticated/apiary'
+      path: '/apiary'
+      fullPath: '/apiary'
+      preLoaderRoute: typeof AuthenticatedApiaryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chain': {
+      id: '/_authenticated/chain'
+      path: '/chain'
+      fullPath: '/chain'
+      preLoaderRoute: typeof AuthenticatedChainRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/register': {
+      id: '/_authenticated/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof AuthenticatedRegisterRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verify/': {
+      id: '/_authenticated/verify/'
+      path: '/verify'
+      fullPath: '/verify/'
+      preLoaderRoute: typeof AuthenticatedVerifyIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/verify/$batchId': {
+      id: '/_authenticated/verify/$batchId'
+      path: '/verify/$batchId'
+      fullPath: '/verify/$batchId'
+      preLoaderRoute: typeof AuthenticatedVerifyBatchIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+  }
+}
+
+interface AuthenticatedRouteRouteChildren {
   AuthenticatedApiaryRoute: typeof AuthenticatedApiaryRoute
   AuthenticatedChainRoute: typeof AuthenticatedChainRoute
   AuthenticatedRegisterRoute: typeof AuthenticatedRegisterRoute
@@ -99,60 +195,21 @@ export interface RootRouteChildren {
   AuthenticatedVerifyIndexRoute: typeof AuthenticatedVerifyIndexRoute
 }
 
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/_authenticated/': {
-      id: '/_authenticated/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/apiary': {
-      id: '/_authenticated/apiary'
-      path: '/apiary'
-      fullPath: '/apiary'
-      preLoaderRoute: typeof AuthenticatedApiaryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/chain': {
-      id: '/_authenticated/chain'
-      path: '/chain'
-      fullPath: '/chain'
-      preLoaderRoute: typeof AuthenticatedChainRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/register': {
-      id: '/_authenticated/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof AuthenticatedRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/verify/': {
-      id: '/_authenticated/verify/'
-      path: '/verify'
-      fullPath: '/verify/'
-      preLoaderRoute: typeof AuthenticatedVerifyIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/verify/$batchId': {
-      id: '/_authenticated/verify/$batchId'
-      path: '/verify/$batchId'
-      fullPath: '/verify/$batchId'
-      preLoaderRoute: typeof AuthenticatedVerifyBatchIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-  }
-}
-
-const rootRouteChildren: RootRouteChildren = {
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedApiaryRoute: AuthenticatedApiaryRoute,
   AuthenticatedChainRoute: AuthenticatedChainRoute,
   AuthenticatedRegisterRoute: AuthenticatedRegisterRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedVerifyBatchIdRoute: AuthenticatedVerifyBatchIdRoute,
   AuthenticatedVerifyIndexRoute: AuthenticatedVerifyIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
