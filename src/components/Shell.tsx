@@ -1,5 +1,7 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState, type ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -9,6 +11,40 @@ const navItems = [
   { to: "/register", label: "Register" },
 ];
 
+function UserMenu() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [name, setName] = useState<string>("");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => {
+      const meta = data.user?.user_metadata as { display_name?: string; role?: string } | undefined;
+      setName(meta?.display_name || data.user?.email || "");
+    });
+  }, []);
+
+  async function handleSignOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+
+  return (
+    <div className="flex items-center gap-3">
+      <span className="hidden max-w-40 truncate rounded-full glass-panel px-4 py-2 text-sm font-bold text-ink/70 md:block">
+        {name}
+      </span>
+      <button
+        type="button"
+        onClick={handleSignOut}
+        className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-lg shadow-brand/40 transition hover:-translate-y-0.5"
+      >
+        Sign out
+      </button>
+    </div>
+  );
+}
 
 export function Shell({ children }: { children: ReactNode }) {
   return (
@@ -43,12 +79,7 @@ export function Shell({ children }: { children: ReactNode }) {
             </Link>
           ))}
         </div>
-        <Link
-          to="/apiary"
-          className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-lg shadow-brand/40 transition hover:-translate-y-0.5"
-        >
-          Get verified badge
-        </Link>
+        <UserMenu />
       </nav>
 
       {children}
