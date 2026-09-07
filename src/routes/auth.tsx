@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 
 export const Route = createFileRoute("/auth")({
   ssr: false,
@@ -79,15 +78,17 @@ function AuthPage() {
 
   async function handleGoogle() {
     setError(null);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
-    if (result.error) {
-      setError(result.error.message ?? "Google sign-in failed");
-      return;
+    if (error) {
+      setError(error.message || "Google sign-in failed");
+      setLoading(false);
     }
-    if (result.redirected) return;
-    navigate({ to: "/" });
   }
 
   return (
@@ -244,6 +245,7 @@ function AuthPage() {
               <button
                 type="button"
                 onClick={handleGoogle}
+                disabled={loading}
                 className="flex w-full items-center justify-center gap-3 rounded-full glass-panel px-6 py-3 text-sm font-bold shadow-sm transition hover:-translate-y-0.5"
               >
                 <GoogleIcon /> Continue with Google
