@@ -44,7 +44,6 @@ function Apiary() {
           >
             Register a batch
           </Link>
-
         </div>
 
         <div className="mt-7 grid gap-5 lg:grid-cols-3">

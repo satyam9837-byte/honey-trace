@@ -27,15 +27,13 @@ function ChainPage() {
   return (
     <Shell>
       <main className="relative z-10 mx-auto max-w-6xl px-6 pb-10 pt-6">
-        <p className="text-xs font-bold uppercase tracking-[0.15em] text-ink/50">
-          Flower to jar
-        </p>
+        <p className="text-xs font-bold uppercase tracking-[0.15em] text-ink/50">Flower to jar</p>
         <h1 className="mt-1 max-w-2xl font-display text-4xl font-semibold md:text-5xl">
           The full traceability chain, not just the hive.
         </h1>
         <p className="mt-3 max-w-2xl text-ink/65">
-          Every batch carries the flowers the bees visited, the days it was harvested, and each
-          step it passed through before the jar was sealed.
+          Every batch carries the flowers the bees visited, the days it was harvested, and each step
+          it passed through before the jar was sealed.
         </p>
 
         <div className="mt-8 space-y-8">
@@ -98,9 +96,7 @@ function ChainPage() {
                     {batch.processing.map((step, i) => (
                       <li
                         key={step.stage}
-                        className={
-                          i === batch.processing.length - 1 ? "relative" : "relative mb-5"
-                        }
+                        className={i === batch.processing.length - 1 ? "relative" : "relative mb-5"}
                       >
                         <span className="absolute -left-6 top-1 size-3.5 rounded-full bg-brand ring-4 ring-brand/20" />
                         <div className="flex flex-wrap items-baseline justify-between gap-2">

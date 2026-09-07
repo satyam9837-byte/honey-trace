@@ -97,7 +97,9 @@ function Index() {
             </div>
             <div className="mt-3 flex items-center justify-between rounded-2xl bg-cream/80 px-4 py-3">
               <div className="flex items-center gap-3">
-                <div className="grid size-10 place-items-center rounded-xl bg-sky/50 text-lg">🌡</div>
+                <div className="grid size-10 place-items-center rounded-xl bg-sky/50 text-lg">
+                  🌡
+                </div>
                 <div className="leading-tight">
                   <p className="text-sm font-bold">Hive climate</p>
                   <p className="text-xs text-ink/50">31°C · 62% RH · stable</p>
@@ -112,7 +114,9 @@ function Index() {
       <section className="relative z-10 mx-auto max-w-7xl px-6 py-10">
         <div className="grid gap-5 md:grid-cols-3">
           <div className="rounded-[1.75rem] glass-panel p-6 shadow-lg shadow-peach/20">
-            <div className="grid size-12 place-items-center rounded-2xl bg-peach/40 text-2xl">🔍</div>
+            <div className="grid size-12 place-items-center rounded-2xl bg-peach/40 text-2xl">
+              🔍
+            </div>
             <h3 className="mt-4 font-display text-xl font-semibold">Consumer QR verification</h3>
             <p className="mt-2 text-sm leading-relaxed text-ink/65">
               Shoppers scan the jar to open the full origin chain — beekeeper, harvest date, and the
@@ -135,8 +139,12 @@ function Index() {
           </div>
 
           <div className="rounded-[1.75rem] glass-panel p-6 shadow-lg shadow-mint/20">
-            <div className="grid size-12 place-items-center rounded-2xl bg-mint/40 text-2xl">🐝</div>
-            <h3 className="mt-4 font-display text-xl font-semibold">AI disease &amp; environment</h3>
+            <div className="grid size-12 place-items-center rounded-2xl bg-mint/40 text-2xl">
+              🐝
+            </div>
+            <h3 className="mt-4 font-display text-xl font-semibold">
+              AI disease &amp; environment
+            </h3>
             <p className="mt-2 text-sm leading-relaxed text-ink/65">
               On-hive sensors stream temperature, humidity and acoustic signals to models that flag
               disease early and alert beekeepers before a colony is at risk.
@@ -164,7 +172,9 @@ function Index() {
               <div className="flex items-end justify-between">
                 <div>
                   <p className="text-xs font-medium text-ink/50">Predicted yield</p>
-                  <p className="font-display text-2xl font-semibold text-brand-deep">4.8 kg / hive</p>
+                  <p className="font-display text-2xl font-semibold text-brand-deep">
+                    4.8 kg / hive
+                  </p>
                 </div>
                 <span className="rounded-full bg-brand/20 px-3 py-1 text-xs font-bold text-brand-deep">
                   Season 26

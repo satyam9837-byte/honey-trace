@@ -15,6 +15,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedApiaryRouteImport } from './routes/_authenticated/apiary'
 import { Route as AuthenticatedChainRouteImport } from './routes/_authenticated/chain'
 import { Route as AuthenticatedRegisterRouteImport } from './routes/_authenticated/register'
+import { Route as AuthCallbackRouteImport } from './routes/auth_.callback'
 import { Route as AuthenticatedVerifyIndexRouteImport } from './routes/_authenticated/verify.index'
 import { Route as AuthenticatedVerifyBatchIdRouteImport } from './routes/_authenticated/verify.$batchId'
 
@@ -47,6 +48,11 @@ const AuthenticatedRegisterRoute = AuthenticatedRegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth_/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedVerifyIndexRoute =
   AuthenticatedVerifyIndexRouteImport.update({
     id: '/verify/',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
   '/verify/': typeof AuthenticatedVerifyIndexRoute
 }
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/': typeof AuthenticatedIndexRoute
   '/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
   '/verify': typeof AuthenticatedVerifyIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/apiary': typeof AuthenticatedApiaryRoute
   '/_authenticated/chain': typeof AuthenticatedChainRoute
   '/_authenticated/register': typeof AuthenticatedRegisterRoute
+  '/auth_/callback': typeof AuthCallbackRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
   '/_authenticated/verify/': typeof AuthenticatedVerifyIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/apiary'
     | '/chain'
     | '/register'
+    | '/auth/callback'
     | '/verify/$batchId'
     | '/verify/'
   fileRoutesByTo: FileRoutesByTo
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/apiary'
     | '/chain'
     | '/register'
+    | '/auth/callback'
     | '/'
     | '/verify/$batchId'
     | '/verify'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/apiary'
     | '/_authenticated/chain'
     | '/_authenticated/register'
+    | '/auth_/callback'
     | '/_authenticated/'
     | '/_authenticated/verify/$batchId'
     | '/_authenticated/verify/'
@@ -123,6 +135,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -169,6 +182,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRegisterRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/auth_/callback': {
+      id: '/auth_/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/verify/': {
       id: '/_authenticated/verify/'
       path: '/verify'
@@ -210,6 +230,7 @@ const AuthenticatedRouteRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

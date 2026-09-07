@@ -44,9 +44,7 @@ function VerifyIndex() {
           className="mt-7 rounded-[1.75rem] glass-panel p-6 shadow-lg shadow-peach/20"
           onSubmit={(e) => {
             e.preventDefault();
-            const found = batches.find(
-              (b) => b.id === code.trim().toUpperCase().replace(/^#/, ""),
-            );
+            const found = batches.find((b) => b.id === code.trim().toUpperCase().replace(/^#/, ""));
             if (!found) {
               setError("We couldn't find that code. Check the sticker and try again.");
               return;
@@ -55,7 +53,10 @@ function VerifyIndex() {
             navigate({ to: "/verify/$batchId", params: { batchId: found.id } });
           }}
         >
-          <label htmlFor="batch" className="text-xs font-bold uppercase tracking-[0.15em] text-ink/50">
+          <label
+            htmlFor="batch"
+            className="text-xs font-bold uppercase tracking-[0.15em] text-ink/50"
+          >
             Batch code
           </label>
           <div className="mt-2 flex flex-wrap gap-3">
