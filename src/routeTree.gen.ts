@@ -15,7 +15,7 @@ import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedApiaryRouteImport } from './routes/_authenticated/apiary'
 import { Route as AuthenticatedChainRouteImport } from './routes/_authenticated/chain'
 import { Route as AuthenticatedRegisterRouteImport } from './routes/_authenticated/register'
-import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as AuthCallbackRouteImport } from './routes/auth_.callback'
 import { Route as AuthenticatedVerifyIndexRouteImport } from './routes/_authenticated/verify.index'
 import { Route as AuthenticatedVerifyBatchIdRouteImport } from './routes/_authenticated/verify.$batchId'
 
@@ -49,9 +49,9 @@ const AuthenticatedRegisterRoute = AuthenticatedRegisterRouteImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthCallbackRoute = AuthCallbackRouteImport.update({
-  id: '/callback',
-  path: '/callback',
-  getParentRoute: () => AuthRoute,
+  id: '/auth_/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedVerifyIndexRoute =
   AuthenticatedVerifyIndexRouteImport.update({
@@ -68,7 +68,7 @@ const AuthenticatedVerifyBatchIdRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
@@ -77,7 +77,7 @@ export interface FileRoutesByFullPath {
   '/verify/': typeof AuthenticatedVerifyIndexRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
   '/apiary': typeof AuthenticatedApiaryRoute
   '/chain': typeof AuthenticatedChainRoute
   '/register': typeof AuthenticatedRegisterRoute
@@ -89,11 +89,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_authenticated/apiary': typeof AuthenticatedApiaryRoute
   '/_authenticated/chain': typeof AuthenticatedChainRoute
   '/_authenticated/register': typeof AuthenticatedRegisterRoute
-  '/auth/callback': typeof AuthCallbackRoute
+  '/auth_/callback': typeof AuthCallbackRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/verify/$batchId': typeof AuthenticatedVerifyBatchIdRoute
   '/_authenticated/verify/': typeof AuthenticatedVerifyIndexRoute
@@ -126,7 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/apiary'
     | '/_authenticated/chain'
     | '/_authenticated/register'
-    | '/auth/callback'
+    | '/auth_/callback'
     | '/_authenticated/'
     | '/_authenticated/verify/$batchId'
     | '/_authenticated/verify/'
@@ -134,7 +134,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -181,12 +182,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRegisterRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/auth/callback': {
-      id: '/auth/callback'
-      path: '/callback'
+    '/auth_/callback': {
+      id: '/auth_/callback'
+      path: '/auth/callback'
       fullPath: '/auth/callback'
       preLoaderRoute: typeof AuthCallbackRouteImport
-      parentRoute: typeof AuthRoute
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/verify/': {
       id: '/_authenticated/verify/'
@@ -226,19 +227,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface AuthRouteChildren {
-  AuthCallbackRoute: typeof AuthCallbackRoute
-}
-
-const AuthRouteChildren: AuthRouteChildren = {
-  AuthCallbackRoute: AuthCallbackRoute,
-}
-
-const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRouteWithChildren,
+  AuthRoute: AuthRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
