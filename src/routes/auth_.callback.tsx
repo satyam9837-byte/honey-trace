@@ -3,7 +3,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth/callback")({
-  ssr: false,
   head: () => ({
     meta: [
       { title: "Completing sign in | Honey Chain" },
