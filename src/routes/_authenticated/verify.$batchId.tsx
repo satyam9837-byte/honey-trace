@@ -73,7 +73,10 @@ function BatchResult() {
               <ol className="relative mt-5 pl-6">
                 <span className="absolute left-[7px] top-2 bottom-2 w-px bg-brand/40" />
                 {batch.steps.map((step, i) => (
-                  <li key={step.hash} className={i === batch.steps.length - 1 ? "relative" : "relative mb-6"}>
+                  <li
+                    key={step.hash}
+                    className={i === batch.steps.length - 1 ? "relative" : "relative mb-6"}
+                  >
                     <span className="absolute -left-6 top-1 size-3.5 rounded-full bg-brand ring-4 ring-brand/20" />
                     <p className="text-sm font-bold">{step.label}</p>
                     <p className="text-xs font-medium text-ink/55">{step.detail}</p>
@@ -96,7 +99,10 @@ function BatchResult() {
                   </p>
                 </div>
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-peach/40">
-                  <div className="h-full rounded-full bg-brand" style={{ width: `${batch.purity}%` }} />
+                  <div
+                    className="h-full rounded-full bg-brand"
+                    style={{ width: `${batch.purity}%` }}
+                  />
                 </div>
                 <p className="mt-3 text-xs font-medium text-ink/55">
                   Moisture {batch.moisture} · HMF {batch.hmf} · no added sugar

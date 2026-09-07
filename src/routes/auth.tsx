@@ -239,7 +239,8 @@ function AuthPage() {
               </form>
 
               <div className="my-5 flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-ink/40">
-                <span className="h-px flex-1 bg-ink/10" /> or <span className="h-px flex-1 bg-ink/10" />
+                <span className="h-px flex-1 bg-ink/10" /> or{" "}
+                <span className="h-px flex-1 bg-ink/10" />
               </div>
 
               <button

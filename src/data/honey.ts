@@ -42,7 +42,6 @@ export type Batch = {
   steps: CustodyStep[];
 };
 
-
 export const batches: Batch[] = [
   {
     id: "HC-2049",
@@ -105,7 +104,6 @@ export const batches: Batch[] = [
     scans: 38412,
     block: "#8,402,117",
     steps: [
-
       {
         label: "Frames harvested",
         detail: "Hive 12 · sensor weight 24.1 kg",
